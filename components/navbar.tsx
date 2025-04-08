@@ -6,7 +6,7 @@ import { EyeClosed, Search } from "lucide-react";
 import { Sheet } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { SheetTitle, SheetTrigger, SheetContent } from "./ui/sheet";
-import Sidebar, { About, RoadMap } from "./sidebar";
+import Sidebar, { About, RiskCard } from "./sidebar";
 
 export default function Navbar({
   recentSearch,
@@ -99,20 +99,8 @@ export default function Navbar({
       </div>
       {!openSection && (
         <div className="w-full flex overflow-x-auto no-scrollbar justify-between items-center lg:hidden gap-6 py-5 md:border-b-0 ">
-          {/* <MobileNav
-          isDrawerOpen={isDrawerOpen}
-          setIsDrawerOpen={setIsDrawerOpen}
-          recentSearch={recentSearch}
-        />
-        <div className="relative  md:hidden flex w-full ">
-          <Search className="absolute left-2 top-[14px]" size={16} />
-          <Input
-            className=" p-2 pl-8 py-2 rounded-full  bg-white/5 w-full  border border-white/5"
-            placeholder="Search"
-          />
-        </div> */}
           <About />
-          <RoadMap />
+          <RiskCard contractAddress={recentSearch?.[0]?.contract} /> {/* Pass the contract prop here */}
         </div>
       )}
     </nav>

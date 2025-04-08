@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { formatDistanceToNow } from "date-fns";
 import { LinkIcon, SendHorizonal, Star } from "lucide-react";
 import Image from "next/image";
 import { cn, getTokenInfo } from "@/lib/utils";
@@ -16,7 +15,6 @@ import Markdown from "react-markdown";
 import { ModifiedResponse } from "@/lib/utils";
 import { LoadingState } from "@/components/loading";
 import { Toaster, toast } from "sonner";
-import { div } from "framer-motion/client";
 const FeaturedCoins = [
   {
     name: "Fartcoin",
@@ -63,11 +61,6 @@ export default function ATS() {
   const handleMsg = async () => {
     if (isLoading) return;
     if (inputValue.trim() === "") {
-      // toast({
-      //   title: "Error",
-      //   description: "Please paste a token address",
-      //   variant: "destructive",
-      // });
       return;
     }
 
@@ -88,6 +81,7 @@ export default function ATS() {
         {
           text: response?.tokenDetails?.tokenName,
           src: response?.socialsData?.imageUrl,
+          ca: inputValue,
         },
         ...prev,
       ];
@@ -113,16 +107,6 @@ export default function ATS() {
       });
     }
   }, [messages]);
-
-  const formatTokenAddress = (address: string): string => {
-    if (address.length <= 10) {
-      return `${address}`; // No need to shorten if the address is already short
-    }
-
-    const prefix = address.slice(0, 4); // First 4 characters
-    const suffix = address.slice(-8); // Last 8 characters
-    return `${prefix}....${suffix}`;
-  };
 
   return (
     <div className="w-full relative lg:px-[42px] px-5 h-svh flex flex-col overflow-x-hidden">
@@ -320,9 +304,7 @@ export default function ATS() {
 function MsgContainer({
   botMsg,
   userMsg,
-  timeStamp,
-  isLoading,
-  ref,
+  ref
 }: {
   botMsg: ModifiedResponse;
   userMsg: string;
@@ -387,56 +369,6 @@ function MsgContainer({
                 <h2 className="font-bold text-xl my-2">Summary</h2>
                 <Markdown>{`${(botMsg as any)?.AIresponse?.summary}`}</Markdown>
               </span>
-              {/* {!botMsg?.error && (
-              <div className=" flex items-center justify-start absolute md:-bottom-8 bottom-2 w-full gap-3">
-                <motion.span
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20,
-                    delay: 0.6,
-                  }}
-                  className={cn(
-                    "bg-white/20 md:text-sm  text-[10px] w-fit px-3 py-1 text-white rounded-full flex gap-2",
-                    botMsg?.tokenDetails?.isHoneyPot &&
-                      "text-white/30 scale-70 opacity-45"
-                  )}
-                >
-                  <Image
-                    src="/honeypot.svg"
-                    alt="Honeypot"
-                    width={16}
-                    height={16}
-                  />
-                  <span>Honeypot</span>
-                </motion.span>
-                <motion.span
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20,
-                    delay: 0.7,
-                  }}
-                  className={cn(
-                    "bg-white/20 md:text-sm  text-[10px] w-fit px-3 py-1 text-white rounded-full flex gap-2",
-                    !botMsg?.tokenDetails?.isHoneyPot &&
-                      "text-white/30 scale-70 opacity-45"
-                  )}
-                >
-                  <Image
-                    src="/safe.svg"
-                    alt="Honeypot"
-                    width={16}
-                    height={16}
-                  />
-                  <span>Safe to Buy</span>
-                </motion.span>
-              </div>
-            )} */}
             </motion.div>
             <motion.div
               initial={{ scale: 0.9 }}
@@ -453,7 +385,7 @@ function MsgContainer({
                   <span>Price: {botMsg?.tokenDetails?.price}</span>
                   <span>
                     TotalSupply: {botMsg?.tokenDetails?.totalSupply}
-                    {botMsg?.AIresponse?.tokenInfo?.symbol}
+                    {(botMsg as any)?.AIresponse?.tokenInfo?.symbol}
                   </span>
                 </div>
               </div>
@@ -469,9 +401,9 @@ function MsgContainer({
                   Holders and Distribution:
                 </h2>
                 <ol className="text-[8px]">
-                  {botMsg?.tokenDestribution
-                    ?.sort((a, b) => b.percentage - a.percentage) // Sort in descending order
-                    .map((holder, i) => (
+                  {(botMsg as any)?.tokenDestribution
+                    ?.sort((a: any, b: any) => b.percentage - a.percentage) // Sort in descending order
+                    .map((holder: any, i: any) => (
                       <li
                         key={holder.address}
                         className="flex justify-between text-sm my-2 w-full"
@@ -500,7 +432,7 @@ function MsgContainer({
             >
               <h2 className="font-bold text-xl my-2">Warning:</h2>
               <span className="text-white/90 text-sm break-words leading-relaxed">
-                <Markdown>{`${botMsg?.AIresponse?.Warnings}`}</Markdown>
+                <Markdown>{`${(botMsg as any)?.AIresponse?.Warnings}`}</Markdown>
               </span>
             </motion.div>
             <motion.div
@@ -509,13 +441,13 @@ function MsgContainer({
               transition={{ duration: 0.3 }}
               className={cn(
                 " p-4 rounded-2xl border border-white/5 overflow-hidden",
-                botMsg?.isContractBundled
+                (botMsg as any)?.isContractBundled
                   ? "bg-[#FF808014]/10"
                   : "bg-[#80FF8014]/10"
               )}
             >
               <h2 className="font-bold text-xl my-2">Bundling Status:</h2>
-              {!botMsg?.isContractBundled ? (
+              {!(botMsg as any)?.isContractBundled ? (
                 <span className="text-white/90 text-sm break-words leading-relaxed">
                   <Markdown>{`$${botMsg?.tokenDetails?.tokenSymbol} does not seem to be bundled 🟢🟢🟢🟢🟢`}</Markdown>
                 </span>
