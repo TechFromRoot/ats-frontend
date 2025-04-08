@@ -64,7 +64,9 @@ export const About = () => {
       <p className="text-[14px] font-inter leading-[16.9px] text-center">
         ATS delivers real-time insights for Solana tokens simply by pasting the token address.
         <div className="mb-1"></div>
-        Powered by <strong>Solscan</strong> and <strong>DD.xyz</strong>, ATS fetches data such as price, market cap, holder stats, and risk scores, helping you make informed decisions in real-time.
+        Powered by <strong>Solscan</strong> and <strong>DD.xyz</strong>
+        <div className="mb-1"></div>
+        ATS fetches data such as price, market cap, holder stats, and risk scores, helping you make informed decisions in real-time.
       </p>
       <div className="h-[74px] relative w-full">
         <Image src="/side.png" alt="ATS Logo" fill className="object-cover" />
