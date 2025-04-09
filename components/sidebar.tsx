@@ -64,7 +64,8 @@ export const About = () => {
       <p className="text-[14px] font-inter leading-[16.9px] text-center">
         ATS delivers real-time insights for Solana tokens simply by pasting the token address.
         <div className="mb-1"></div>
-        Powered by <strong>Solscan</strong> and <strong>DD.xyz</strong>
+        Powered by <strong>Solscan</strong>
+         {/* and <strong>DD.xyz</strong> */}
         <div className="mb-1"></div>
         ATS fetches data such as price, market cap, holder stats, and risk scores, helping you make informed decisions in real-time.
       </p>
@@ -83,81 +84,84 @@ interface RiskData {
 }
 
 export const RiskCard: React.FC<{ contractAddress: string }> = ({ contractAddress }) => {
-  const [riskData, setRiskData] = useState<RiskData | null>(null);
-  const colour =
-    riskData?.riskScore === "Low Risk"
-      ? "#00F5A0"
-      : riskData?.riskScore === "Medium Risk"
-        ? "#FFA500"
-        : "#FF4D4D";
+  // const [riskData, setRiskData] = useState<RiskData | null>(null);
+  // const colour =
+  //   riskData?.riskScore === "Low Risk"
+  //     ? "#00F5A0"
+  //     : riskData?.riskScore === "Medium Risk"
+  //       ? "#FFA500"
+  //       : "#FF4D4D";
 
-  useEffect(() => {
-    if (!contractAddress) return;
+  // useEffect(() => {
+  //   if (!contractAddress) return;
 
-    const fetchRiskData = async () => {
-      try {
-        const res = await fetch(`https://api.webacy.com/contracts/${contractAddress}`, {
-          headers: {
-            "x-api-key": "fIn7KhmIoRaGqKgFGDEDX8iamINbYVrP6Kzce91e", // replace this with your actual key
-            "Content-Type": "application/json",
-          },
-        });
+  //   const fetchRiskData = async () => {
+  //     try {
+  //       const res = await fetch(`https://api.webacy.com/contracts/${contractAddress}`, {
+  //         headers: {
+  //           "x-api-key": "fIn7KhmIoRaGqKgFGDEDX8iamINbYVrP6Kzce91e",
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
 
-        if (!res.ok) throw new Error("Network response was not ok");
+  //       console.log(contractAddress)
+  //       if (!res.ok) throw new Error("Network response was not ok");
 
-        const data: RiskData = await res.json();
-        setRiskData(data);
-      } catch (error) {
-        console.error("Failed to fetch risk data:", error);
-      }
-    };
+  //       const data: RiskData = await res.json();
+  //       console.log("Risk data:", data);
+  //       setRiskData(data);
+  //     } catch (error) {
+  //       console.error("Failed to fetch risk data:", error);
+  //     }
+  //   };
 
-    fetchRiskData();
-  }, []);
+  //   fetchRiskData();
+  // }, []);
 
   return (
-    <div className="flex relative flex-col gap-4 w-full px-[16px] min-w-[286px] text-white py-[10px] rounded-md bg-[#1B1F27]">
-      {riskData && (
-        <div className="flex flex-col gap-2 mt-2">
-          <div className="flex items-center gap-1 mb-8">
-            <span
-              className="font-semibold text-xl"
-              style={{ color: colour }}
-            >
-              {riskData.riskScore}
-            </span>
-            <span
-              className="h-4 w-4 rounded-full"
-              style={{ backgroundColor: colour }}
-            ></span>
-            <span className="text-xl text-white/70 ml-2">
-              (Score: {riskData.score}/10)
-            </span>
-          </div>
+    // <div className="flex relative flex-col gap-4 w-full px-[16px] min-w-[286px] text-white py-[10px] rounded-md bg-[#1B1F27]">
+    //   {riskData && (
+    //     <div className="flex flex-col gap-2 mt-2">
+    //       <div className="flex items-center gap-1 mb-8">
+    //         <span
+    //           className="font-semibold text-xl"
+    //           style={{ color: colour }}
+    //         >
+    //           {riskData.riskScore}
+    //         </span>
+    //         <span
+    //           className="h-4 w-4 rounded-full"
+    //           style={{ backgroundColor: colour }}
+    //         ></span>
+    //         <span className="text-xl text-white/70 ml-2">
+    //           (Score: {riskData.score}/10)
+    //         </span>
+    //       </div>
 
-          <div className="relative w-full h-2 rounded-full bg-white/10 mt-1">
-            <div
-              className="absolute top-1/2 transform -translate-y-1/2 h-4 w-4 rounded-full"
-              style={{
-                left: `${(riskData.score / 10) * 100}%`,
-                backgroundColor: colour,
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          </div>
-        </div>
-      )}
+    //       <div className="relative w-full h-2 rounded-full bg-white/10 mt-1">
+    //         <div
+    //           className="absolute top-1/2 transform -translate-y-1/2 h-4 w-4 rounded-full"
+    //           style={{
+    //             left: `${(riskData.score / 10) * 100}%`,
+    //             backgroundColor: colour,
+    //             transform: "translate(-50%, -50%)",
+    //           }}
+    //         />
+    //       </div>
+    //     </div>
+    //   )}
 
-      <div className="flex justify-end mt-auto">
-        <div className="w-[80px] h-[50px]">
-          <Image
-            src="/DD-xyz_Color_Transparent.png"
-            alt="Logo"
-            width={80}
-            height={80}
-          />
-        </div>
-      </div>
-    </div>
+    //   <div className="flex justify-end mt-auto">
+    //     <div className="w-[80px] h-[50px]">
+    //       <Image
+    //         src="/DD-xyz_Color_Transparent.png"
+    //         alt="Logo"
+    //         width={80}
+    //         height={80}
+    //       />
+    //     </div>
+    //   </div>
+    // </div>
+    <></>
   );
 };
