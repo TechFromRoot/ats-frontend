@@ -68,7 +68,7 @@ export default function ATS() {
     setIsLoading(true);
 
     const response = await getTokenInfo(inputValue);
-    console.log(response);
+    console.log("response", response);
 
     const newMessage = {
       userMsg: inputValue,
@@ -481,7 +481,7 @@ function MsgContainer({
           </div>
           {!botMsg?.error && (
             <div className="flex gap-1 mt-2 relative -bottom-8 md:mt-0 md:flex-col pb-20 justify-center items-center">
-              <Button
+              {/* <Button
                 size="icon"
                 variant="ghost"
                 className={cn(
@@ -489,10 +489,10 @@ function MsgContainer({
                 )}
               >
                 <Image src="/share.svg" alt="Share" width={16} height={16} />
-              </Button>
+              </Button> */}
               <Button
                 size="icon"
-                onClick={() => handleCopy(botMsg.AIresponse)}
+                onClick={() => handleCopy(JSON.stringify(botMsg.AIresponse, null, 2))}
                 variant="ghost"
                 className={cn(
                   "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors duration-150 "
