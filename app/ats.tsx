@@ -379,11 +379,11 @@ function MsgContainer({
               <div className="text-white/90 text-sm break-words leading-relaxed">
                 <h2 className="font-bold text-xl my-2">Token Info</h2>
                 <div className="flex flex-wrap gap-2">
-                  <span>Name: {botMsg?.tokenDetails?.tokenName}</span>
-                  <span>Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
+                  <span className="block">Name: {botMsg?.tokenDetails?.tokenName}</span>
+                  <span className="block">Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
 
-                  <span>Price: {botMsg?.tokenDetails?.price}</span>
-                  <span>
+                  <span className="block">Price: {botMsg?.tokenDetails?.price}</span>
+                  <span className="block">
                     TotalSupply: {botMsg?.tokenDetails?.totalSupply}
                     {(botMsg as any)?.AIresponse?.tokenInfo?.symbol}
                   </span>
@@ -469,9 +469,9 @@ function MsgContainer({
                   Value and market capitalization:
                 </h2>
                 <div className="flex flex-wrap gap-2">
-                  <span>Price: {botMsg?.tokenDetails?.price}</span>
-                  <span>Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
-                  <span>
+                  <span className="block">Price: {botMsg?.tokenDetails?.price}</span>
+                  <span className="block">Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
+                  <span className="block">
                     Market Cap:
                     {botMsg?.tokenDetails?.marketCap}
                   </span>
