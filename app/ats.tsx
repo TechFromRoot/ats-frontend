@@ -378,7 +378,7 @@ function MsgContainer({
             >
               <div className="text-white/90 text-sm break-words leading-relaxed">
                 <h2 className="font-bold text-xl my-2">Token Info</h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col gap-2">
                   <span className="block">Name: {botMsg?.tokenDetails?.tokenName}</span>
                   <span className="block">Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
 
@@ -468,7 +468,7 @@ function MsgContainer({
                 <h2 className="font-bold text-xl my-2">
                   Value and market capitalization:
                 </h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col gap-2">
                   <span className="block">Price: {botMsg?.tokenDetails?.price}</span>
                   <span className="block">Symbol: {botMsg?.tokenDetails?.tokenSymbol}</span>
                   <span className="block">
